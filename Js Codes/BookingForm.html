@@ -1,0 +1,151 @@
+<!-- Used fabform.io form backend service --->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        .form-group button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"> </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("I0ZQkAqwKr9D4ENvf");
+        })(); 
+    </script>
+</head>
+<body>
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="Date" name="Date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="time" id="Time" name="Time" required>
+            </div>
+            <div class="form-group">
+                <label for="noOfGuests">no.of Guests:</label>
+                <input type="text" id="noOfGuests" name="noOfGuests" required>
+            </div>
+            <div class="form-group">
+                <button onclick="sendemail()" type="button">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    function sendemail(){
+
+var email=document.getElementById("email").value;
+var to_name=document.getElementById("name").value;
+var booking_date=document.getElementById("Date").value;
+var booking_time=document.getElementById("Time").value;
+var no_of_guests=document.getElementById("noOfGuests").value;
+
+var templateParams = {
+    email: email,
+    to_name: to_name,
+    booking_date: booking_date,
+    booking_time: booking_time,
+    no_of_guests: no_of_guests
+  };
+
+  emailjs.send('service_foodiefriends', 'template_booking', templateParams)
+.then(function(response) {
+ console.log('SUCCESS!', response.status, response.text);
+ alert("Sent successfully!");
+ 
+})
+
+ 
+}
+</script>
